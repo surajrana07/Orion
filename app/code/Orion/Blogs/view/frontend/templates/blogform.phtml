@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @var \Orion\Blogs\Block\Display $block
+ */
+    $cust = $block->getLoggedinCustomerId();
+    if($cust==NULL){
+        header("Location: ../../");
+        exit;
+    }
+?>
+
+<style>
+.blog-form{margin:10% auto; width: 80%; background: rgba(0,0,0,0.5); padding: 10px;}
+.txt-box{margin: 5px; width: 50%}
+
+</style>
+<div class="blog-form">
+	<?php 
+		$id = $this->getRequest()->getParam('id'); 
+		$data = $block->getBlogCollection($id);
+		$data = $data->getFirstItem();
+	?>
+
+    <form action="<?php echo $block->getFormAction() ?>" method="post">
+    	<?php 
+    		if($id!=''){
+    		?>
+    			<div class="txt-box">
+		        	<input name="id" type="hidden" value="<?php echo $id; ?>">
+		            <input name="cust_id" type="hidden" value="<?php echo $cust; ?>">
+		        </div>
+		        <div class="txt-box">
+		            <label>Title</label>
+		            <input name="title" type="text" value="<?php echo $data->getData('title') ?>" required>
+		        </div>
+		        <div class="txt-box">
+		            <label>Content</label>
+		            <textarea name="content"><?php echo $data->getData('content') ?></textarea> 
+		        </div>
+    		<?php
+    	} 
+    	else
+    	{
+    		?>
+    			<div class="txt-box">
+		            <input name="cust_id" type="hidden" value="<?php echo $cust; ?>">
+		        </div>
+		        <div class="txt-box">
+		            <label>Title</label>
+		            <input name="title" type="text" required>
+		        </div>
+		        <div class="txt-box">
+		            <label>Content</label>
+		            <textarea name="content"></textarea> 
+		        </div>
+    		<?php
+    	}
+    	?>
+        <div class="blog-btn">
+            <button>Save</button> 
+        </div>
+    </form>
+</div>
+</body>
+</html>

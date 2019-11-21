@@ -1,0 +1,83 @@
+<?php
+$collection = $block->getBlogCollection();
+$cust = $block->getLoggedinCustomerId();
+if(count($collection) > 0 ):
+  ?>
+  <div class="block">
+    <div class="block-title"
+    ><strong><?= $block->escapeHtml(__('My blogs')) ?></strong></div>
+    <div class="block-content">
+
+      <table class="data table">
+        <tr>
+          <th class="post-id">Sr/No.</th>
+          <th class="post-name">title</th>
+          <th class="post-name">Content</th>
+          <th class="post-name">Created At</th>
+          <th class="post-name">Updated At</th>
+          <th class="post-name">Status</th>
+          <th class="post-name">Edit</th>
+          <th class="post-name">Delete</th>
+        </tr>
+        <?php
+        if($cust!=NULL)
+        {
+
+          $i = 1;
+          foreach ($block->getBlogCollection() as $key=>$post){
+            if($post->getStatus()==1){
+              $status = "Approved";
+            }
+            else
+            {
+              $status = "Disapproved";
+            }
+            $count = 0;
+
+            if($post->getCustId()==$cust){
+              echo '<tr>
+              <td>'.$i.'</td>
+              <td>'.$post->getTitle().'</td>
+              <td>'.$post->getContent().'</td>
+              <td>'.$post->getCreatedAt().'</td>
+              <td>'.$post->getUpdatedAt().'</td>
+              <td>'.$status.'</td>
+              <td><a href="'.$block->getSiteUrl().'id/'.$post->getId().'">Edit</a></td>
+              <td><a href="'.$block->getDeleteUrl().'blog_id/'.$post->getId().'">Delete</a></td>
+              </tr>';
+              $i++;
+              $count = 1;
+            }
+          }
+          if($count==0){
+            echo '<tr>
+            <td colspan="6">No Items</td>
+            </tr>';
+          }
+        }
+        else{
+          echo '<tr>
+          <td colspan="6">No Items</td>
+          </tr>';
+        }
+        ?>
+      </table>
+    </div>
+  </div>
+
+  <?php
+else:
+  ?>
+  <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have not created any blogs yet, Please create blog.') ?></span></div>
+
+  <?php
+endif;
+?>
+<hr>
+<div class="block">
+  <div class="block-title"
+  ><strong><?= $block->escapeHtml(__('Create new blog')) ?></strong></div>
+  <div class="block-content">
+    <a class="action primary add" href="<?php echo $block->getSiteUrl(); ?>"><span><?= $block->escapeHtml(__('Add new blog')) ?></span></a>
+  </div>
+</div>

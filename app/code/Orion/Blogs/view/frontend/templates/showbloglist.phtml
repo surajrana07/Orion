@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @var \Orion\Blogs\Block\Display $block
+ */
+    $cust = $block->getLoggedinCustomerId();
+?>
+<style type="text/css">
+	.main-content{
+		width:80%;
+		margin:0 auto;
+		
+	}
+	.blog-wrapper{
+		padding: 10px;
+	}
+</style>
+    <?php
+        foreach ($block->getBlogCollection() as $key=>$post){
+        	$cust_collection = $block->getCustomerById($post->getCustId());
+            echo '<div class="main-content"><div class="blog-wrapper">
+	                   <div class="title-content"><h3>'.$post->getTitle().'</h3></div>
+	                   <div class="content-sec">'.$post->getContent().'</div>
+	                   <div class="created-at">'.'<strong>'.$cust_collection->getName()."</strong>"." ".$post->getCreatedAt().'</div>
+                  </div></div>';
+        }
+    ?>
+
+<script type="text/javascript">
+  require(['jquery', 'jquery/ui'], function($){
+    $(".showform").click(function() { 
+      $(".blog-form").css("display", "block");
+    });
+  });
+</script>
+</body>
+</html>
