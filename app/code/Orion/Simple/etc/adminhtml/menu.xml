@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Orion_Simple::blog" title="Simple " module="Orion_Simple" sortOrder="10"  resource="Orion_Simple::blog" />
+       	<add id="Orion_Simple::custom_insert_blog" title="Simple Blog" module="Orion_Simple" sortOrder="10" action="Orion_Simple_admin/Post/Index" resource="Orion_Simple::blog" parent="Orion_Simple::blog"/>
+    </menu>
+</config>
