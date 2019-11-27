@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="hideprice" translate="label" sortOrder="100">
+            <label>Estdevs</label>
+        </tab>
+        <section id="hideprice" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Hide Price</label>
+            <tab>hideprice</tab>
+            <resource>Orion_Hideprice::Orion_Hideprice</resource>
+            <group id="configuration" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+
+                <!-- Enable or disable plugin -->
+                <label>Hide Price  Setting</label>
+                <field id="enablehideprice" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                 <!-- group wise selection to hide price  -->
+                  <field id="price_message" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Text in place of Price</label>
+                </field>
+
+                <field id="price_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Login Button Text</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
